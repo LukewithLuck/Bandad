@@ -40,7 +40,7 @@ if not st.session_state["password_correct"]:
 st.title("🍌 Consultoria: Pai-Banana")
 
 # --- PROTEÇÃO DA IMAGEM ---
-NOME_IMAGEM = "Gemini_Generated_Image_.jpg"
+NOME_IMAGEM = "foto.jpg"
 
 if os.path.exists(NOME_IMAGEM):
     st.image(NOME_IMAGEM, use_column_width=True)
