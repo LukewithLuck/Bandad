@@ -52,7 +52,7 @@ if not st.session_state["password_correct"]:
     st.title("🍌 Área Restrita da Família")
     senha = st.text_input("Digite a senha para entrar:", type="password")
     if st.button("Entrar"):
-        if senha == "banana123": # <--- PODE MUDAR A SENHA AQUI
+        if senha == "banana123": # <--- SENHA DA FAMÍLIA
             st.session_state["password_correct"] = True
             st.rerun()
         else:
@@ -63,7 +63,7 @@ if not st.session_state["password_correct"]:
 st.title("🍌 Consultoria: Pai-Banana")
 st.write("O analista mais 'preguiçoso' da internet.")
 
-# Tenta carregar a imagem (Garanta que o nome no GitHub seja igual)
+# Tenta carregar a imagem (Garanta que o nome no GitHub seja Gemini_Generated_Image_.jpg)
 st.image("Gemini_Generated_Image_.jpg", use_column_width=True)
 
 st.write("---")
@@ -71,7 +71,7 @@ pergunta = st.text_input("O que você quer que eu analise?")
 arquivo = st.file_uploader("Ou mande uma foto:", type=["jpg", "png", "jpeg"])
 
 respostas_deizy = [
-    "A Deizy olhou e disse: 'Isso aí é perda de tempo, compra uma coca pra mim ou te dou um coro'.",
+    "A Deizy olhou e disse: 'Isso aí é perda de tempo, compra uma coca pra mim'.",
     "Veredito da Deizy: 'Se você gastar dinheiro com isso, não vou fazer janta'.",
     "Deizy falou: 'Achei feio e caro, mas vou gastar meu salário com Coca-Cola'.",
     "A patroa mandou avisar: 'Isso é golpe, sai dessa agora!'.",
@@ -102,4 +102,4 @@ if st.button("Consultar Especialista"):
         st.subheader("O que a Deizy disse:")
         st.error(random.choice(respostas_deizy))
     else:
-        st.warning("Mande uma dúvida pro homem, fih
+        st.warning("Mande uma dúvida pro homem, fih!")
