@@ -1,70 +1,51 @@
 import streamlit as st
 import random
 import time
+import os
 
 # 1. CONFIGURAÇÃO DA PÁGINA
 st.set_page_config(page_title="Analista Pai-Banana", page_icon="🍌", layout="centered")
 
-# 2. VISUAL (FRONT-END) - Amarelo, Preto e Branco
+# 2. VISUAL (FRONT-END)
 st.markdown("""
     <style>
-    /* Fundo da página em Amarelo */
-    .stApp {
-        background-color: #fcdb05; 
-    }
-    /* Botão em Preto com texto Branco */
+    .stApp { background-color: #fcdb05; }
     .stButton>button {
-        width: 100%;
-        border-radius: 10px;
-        background-color: #000000;
-        color: #ffffff;
-        height: 3em;
-        font-weight: bold;
-        border: none;
+        width: 100%; border-radius: 10px;
+        background-color: #000000; color: #ffffff;
+        height: 3em; font-weight: bold; border: none;
     }
-    /* Efeito ao passar o mouse no botão */
-    .stButton>button:hover {
-        background-color: #333333;
-        color: #fcdb05;
-    }
-    /* Inputs (campos de texto) com borda preta */
-    .stTextInput>div>div>input {
-        border-radius: 10px;
-        border: 2px solid #000000;
-    }
-    /* Estilo da Imagem */
-    div[data-testid="stImage"] img {
-        border-radius: 15px;
-        border: 4px solid #000000;
-    }
-    /* Cor dos textos e títulos para Preto */
-    h1, h2, h3, p, span, label {
-        color: #000000 !important;
-    }
+    .stTextInput>div>div>input { border-radius: 10px; border: 2px solid #000000; }
+    div[data-testid="stImage"] img { border-radius: 15px; border: 4px solid #000000; }
+    h1, h2, h3, p, span, label { color: #000000 !important; }
     </style>
     """, unsafe_allow_html=True)
 
-# 3. SISTEMA DE SENHA (SEGURANÇA)
+# 3. SISTEMA DE SENHA
 if "password_correct" not in st.session_state:
     st.session_state["password_correct"] = False
 
 if not st.session_state["password_correct"]:
-    st.title("🍌 Área Restrita da Família")
-    senha = st.text_input("Digite a senha para entrar:", type="password")
+    st.title("🍌 Área Restrita")
+    senha = st.text_input("Digite a senha:", type="password")
     if st.button("Entrar"):
-        if senha == "banana123": # <--- SENHA DA FAMÍLIA
+        if senha == "banana123":
             st.session_state["password_correct"] = True
             st.rerun()
         else:
-            st.error("Senha errada, fih! Pergunta pro Lucca.")
+            st.error("Senha errada!")
     st.stop()
 
-# 4. CONTEÚDO DO APP (SÓ APARECE COM A SENHA)
+# 4. CONTEÚDO DO APP
 st.title("🍌 Consultoria: Pai-Banana")
-st.write("O analista mais 'preguiçoso' da internet.")
 
-# Tenta carregar a imagem (Garanta que o nome no GitHub seja Gemini_Generated_Image_.jpg)
-st.image("Gemini_Generated_Image_.jpg", use_column_width=True)
+# --- PROTEÇÃO DA IMAGEM ---
+NOME_IMAGEM = "Gemini_Generated_Image_.jpg"
+
+if os.path.exists(NOME_IMAGEM):
+    st.image(NOME_IMAGEM, use_column_width=True)
+else:
+    st.warning(f"⚠️ Atenção Lucca: O arquivo '{NOME_IMAGEM}' não foi encontrado no GitHub. Verifique o nome!")
 
 st.write("---")
 pergunta = st.text_input("O que você quer que eu analise?")
@@ -77,28 +58,21 @@ respostas_deizy = [
     "A patroa mandou avisar: 'Isso é golpe, sai dessa agora!'.",
     "Deizy disse: 'Pode até ser bom, mas se fizer isso nunca mais conta comigo pra nada'.",
     "Ele perguntou pra Deizy e ela respondeu: 'Pergunta pro Lucca, ele que é o gênio da computação'.",
-    "Ele falou com a Deizy e ela respondeu: 'Manda pro Lucca, ele que é o faz-tudo aqui da casa'.",
     "Deizy examinou e concluiu: 'É perda de tempo!'.",
-    "A Deizy não respondeu e brigou comigo por interromper o shorts dela.",
-    "A Deizy não respondeu porque tava vendo notícia ruim no celular.",
-    "A Deizy disse pra mim olhar, mas eu não vou olhar porque só quero ver YouTube e dormir de tarde."
+    "A Deizy não respondeu porque tava vendo notícia no celular.",
+    "A Deizy disse pra mim olhar, mas eu não vou olhar porque só quero YouTube."
 ]
 
-# 5. LÓGICA DE AÇÃO (BACK-END)
 if st.button("Consultar Especialista"):
     if pergunta or arquivo:
-        # O Delay de 5 segundos que você pediu
-        with st.status("Analisando seriamente...", expanded=True) as status:
+        with st.status("Analisando...", expanded=True) as status:
             time.sleep(5)
-            st.write("Conectando ao cérebro da Deizy...")
+            st.write("Incomodando a Deizy...")
             time.sleep(2)
             status.update(label="Análise finalizada!", state="complete", expanded=False)
         
-        # Mensagem de preguiça
         st.info("👴: Ah, tô com preguiça... Vou falar pra Deizy fazer isso.")
         time.sleep(2)
-        
-        # Resposta final da Deizy
         st.subheader("O que a Deizy disse:")
         st.error(random.choice(respostas_deizy))
     else:
